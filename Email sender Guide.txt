@@ -1,0 +1,14 @@
+Email Generation Guide By Harsh Chauhan
+----------------------------------------
+Email Dependency : { Java Mail Sender }
+1. create {emailService} and @AutoWired [JavaMainSender mailSender].
+2. create method {sendEmail(email,data or pdfBytes)}.
+	2.1 create an object of { MimeMessage message = mailSender.createMimeMessage(); }
+	2.2 create an object of { MimeMessageHelper helper = MimeMessageHelper(message,true); } true for multipart/mixed.
+	2.3 use the object of (helper) set [email,subject,text,addAttachment] and then { mailSender.send(message); }.
+	2.4 in addAttachment(<name of file>, new ByteArrayResource(pdfBytes) or data);
+3. use try catch because this can throw { MessagingException }
+	1. MessagingException -> normal base exception for network issue 
+	2. AddressException -> email address has an invalid format.
+	3. SendFailedException -> email cannot be sent,often due to invalid addresses or network issues.
+	4. AuthenticationFailedException -> invalid credentials

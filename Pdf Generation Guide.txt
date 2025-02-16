@@ -1,0 +1,35 @@
+Pdf Generation Guide
+------------------------
+pdf Dependency:>
+	<dependency>
+	    <groupId>com.itextpdf</groupId>
+	    <artifactId>kernel</artifactId>
+	    <version>7.2.5</version>
+	</dependency>
+		
+	<!-- Layout module for adding content like paragraphs, tables, etc. -->
+	<dependency>
+	    <groupId>com.itextpdf</groupId>
+	    <artifactId>layout</artifactId>
+	    <version>7.2.5</version>
+	</dependency>
+
+1. create {PdfService} class.
+2. add method pdfGenerator(data) which will return { byte[] }.
+3. create object of { ByteArrayOutputStream } as try with resource.
+4. inside try create ->
+	4.1 PdfWriter writer = new PdfWriter(outputStream);
+	4.2 PdfDocument pdf = new PdfDocument(writer);
+     	4.3 Document document = new Document(pdf);
+5. do 
+	document.add(new Paragraph("Application Form"));
+        document.add(new Paragraph("Name: " + formRequest.getName()));
+        document.add(new Paragraph("Email: " + formRequest.getEmail()));
+        document.add(new Paragraph("Message: " + formRequest.getMessage()));
+6. close the document and return the outputStream in ByteArray format.
+        document.close();
+       return outputStream.toByteArray();
+7. exceptions to handle
+	7.1 IOException -> from PdfWriter when {ByteArrayOutputStream fails to write}
+	7.2 PdfException -> from PdfDocument or Document when Invalid operations like closing the document twice, adding null content, 			or unsupported PDF elements and  PDF structure or content is invalid.
+	7.3 RuntimeException -> generic 

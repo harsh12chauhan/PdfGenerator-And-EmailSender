@@ -12,3 +12,11 @@ Email Dependency : { Java Mail Sender }
 	2. AddressException -> email address has an invalid format.
 	3. SendFailedException -> email cannot be sent,often due to invalid addresses or network issues.
 	4. AuthenticationFailedException -> invalid credentials
+4. adding configuration to application.properties
+	# Email Configuration
+	spring.mail.host=smtp.gmail.com
+	spring.mail.port=587
+	spring.mail.username=hellocdac0060@gmail.com
+	spring.mail.password=ckpv fljr hhgx oyzv
+	spring.mail.properties.mail.smtp.auth=true
+	spring.mail.properties.mail.smtp.starttls.enable=true
